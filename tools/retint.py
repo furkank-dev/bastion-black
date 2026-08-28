@@ -69,8 +69,12 @@ open("themes/bastion-black-muted-color-theme.json", "a").write("\n")
 roles = [("plain text","#A9A3B5"),("keyword","#B77BCC"),("accent violet","#C57AD4"),
          ("function amber","#C9A94E"),("ui amber","#F5C842"),("string rose","#C4899B"),
          ("number periwinkle","#93A8D9"),("type teal","#63A39B"),("property lavender","#A897C4"),
-         ("error red","#C46A6A"),("unresolved","#8F8296"),("comment","#6A6478")]
+         ("parameter slate","#8699A2"),("error red","#C46A6A"),("unresolved","#8F8296"),
+         ("comment","#7B7489"),("line number","#554F5E")]
 print(f"{'role':20} {'before':>9} {'after':>9}   contrast")
 for name, h in roles:
-    n = table[h]
+    n = table.get(h)
+    if n is None:                       # colour no longer present in the theme
+        print(f"{name:20} {h:>9}   (not in theme any more)")
+        continue
     print(f"{name:20} {h:>9} {n:>9}   {contrast(h):5.2f} -> {contrast(n):5.2f}")

@@ -12,8 +12,8 @@ The background is true black (`#000000`). Nothing in the syntax palette is pure 
 | Elevated | `#0A0A0D` `#0C0C10` `#141419` | widgets, inputs, hover, selection |
 | Borders | `#121218` `#1A1A21` | panel splits, widget outlines |
 | Text | `#A9A3B5` | plain identifiers and body text |
-| Muted | `#7C7689` `#6A6478` | status bar, comments |
-| Faint | `#4A4552` `#3E3947` | punctuation, line numbers, inlay hints |
+| Muted | `#7C7689` `#7B7489` | status bar, comments |
+| Faint | `#4A4552` `#554F5E` | punctuation, line numbers, inlay hints |
 | Violet | `#C57AD4` `#B77BCC` | cursor, active borders, badges / keywords |
 | Amber | `#F5C842` `#C9A94E` | find match, lightbulb / functions |
 | Rose | `#C4899B` | strings |
@@ -44,12 +44,27 @@ Turn it off by pointing the fallback back at the normal foreground:
 }
 ```
 
-## Two chroma levels
+## Which variant
+
+**Use Bastion Black Clear.** It is the one built from published guidance rather
+than taste: chroma reduced per Material's dark-theme recommendation, luminance
+raised to the band APCA calls for in dark mode. The other two exist for specific
+reasons, not as equal alternatives.
+
+Switch to **Muted** if bright text on black visibly glows or fuzzes at the letter
+edges for you — that is halation, it affects roughly half the population to some
+degree, and lower luminance is the correct response to it. Switch to the original
+**Bastion Black** if you want the most colour separation and your room is bright.
+
+## Three variants
 
 | Variant | Plain text | Syntax band | Use when |
 |---|---|---|---|
-| **Bastion Black** | 8.6:1 | 5.6 – 9.3:1 | bright rooms, glossy panels, short sessions |
-| **Bastion Black Muted** | 7.3:1 | 5.6 – 7.4:1 | dim rooms, OLED, all-day sessions |
+| Variant | Plain text | APCA Lc | Mean chroma | Use when |
+|---|---|---|---|---|
+| **Clear** *(default)* | 11.4:1 | 68 | 0.067 | almost always |
+| Muted | 7.3:1 | 47 | 0.052 | you see halation around letters |
+| Bastion Black | 8.6:1 | 54 | 0.084 | bright room, want maximum hue separation |
 
 The muted variant is not the normal one dimmed. Every colour was converted to OKLCh,
 had its chroma cut to 62%, and kept its perceptual lightness — so the colour stops
@@ -74,20 +89,36 @@ strain than the softer colour saves.
 
 ```jsonc
 {
-  "workbench.colorTheme": "Bastion Black",
-  "editor.fontFamily": "'JetBrains Mono Nerd Font', monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 14,
+  "workbench.colorTheme": "Bastion Black Clear",
+  "editor.fontFamily": "'Hack Nerd Font Mono', monospace",
+  "editor.fontSize": 15,
   "editor.lineHeight": 1.6,
   "editor.cursorBlinking": "solid",
   "editor.cursorWidth": 2,
   "editor.renderLineHighlight": "all",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
-  "terminal.integrated.fontFamily": "'JetBrains Mono Nerd Font'",
   "workbench.list.smoothScrolling": true
 }
 ```
+
+Line height matters more than it looks: on a black background, tight leading is
+one of the few settings that reliably costs you on a long session. Do not go
+below 1.4.
+
+Two settings are font-dependent, so they are left out of the block above:
+
+- `"editor.fontLigatures": true` — only does something if your font has
+  programming ligatures. JetBrains Mono, Fira Code and Cascadia Code do; Hack,
+  DejaVu Sans Mono and Menlo do not.
+- `"editor.fontWeight": "500"` — text looks optically thinner on dark
+  backgrounds, and APCA folds font weight into its contrast model, so a heavier
+  stroke buys real legibility. It only works if the family ships a Medium
+  weight. Check with `fc-list | grep -i "<family>" | grep -io medium`. If that
+  comes back empty, leave the setting out — the browser will just draw Regular.
+
+If your font has no Medium weight, raise `editor.fontSize` by a point instead.
+Size affects the APCA readability threshold more strongly than weight does.
 
 ## Tweaking without forking
 
