@@ -65,6 +65,7 @@ degree, and lower luminance is the correct response to it. Switch to the origina
 | **Clear** *(default)* | 11.4:1 | 68 | 0.067 | almost always |
 | Muted | 7.3:1 | 47 | 0.052 | you see halation around letters |
 | Bastion Black | 8.6:1 | 54 | 0.084 | bright room, want maximum hue separation |
+| **Gilded** | 11.5:1 | 68 | 0.065 | black, bone and gold; violet only in the chrome |
 
 The muted variant is not the normal one dimmed. Every colour was converted to OKLCh,
 had its chroma cut to 62%, and kept its perceptual lightness — so the colour stops

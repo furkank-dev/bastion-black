@@ -1,5 +1,46 @@
 # Changelog
 
+## 1.5.1
+
+Gilded rebuilt. The 1.5.0 release did not match what it was designed to be.
+
+- **Brackets are no longer violet.** VS Code colours bracket pairs from a
+  six-colour palette, and the first entry had been left as the chrome violet, so
+  every parenthesis in the editor was purple. The palette is rebuilt in
+  gold / bone / steel; violet now really is confined to cursor, active tab
+  border, badges, buttons and the active line number.
+- **Brightness matched to Clear.** Every role is now placed at the exact APCA
+  lightness of the corresponding role in Clear, so switching between the two
+  changes hue and not intensity. Keyword and number had been well above Clear's
+  ceiling.
+- **Bold and italic removed.** Separation is carried by lightness alone, as in
+  the other variants. Worst-case semantic pair is CIEDE2000 10.7, above Clear's
+  8.0, with mean chroma 0.063.
+- **Terminal green and cyan separated in every variant.** `terminal.ansiGreen`
+  and `terminal.ansiCyan` were 6.6 degrees apart in hue and the bright pair was
+  byte-identical, which broke `ls`, `git diff` and `grep` output in the
+  integrated terminal. Fixed in the base palette, so Black, Muted, Clear and
+  Gilded all inherit the fix.
+
+## 1.5.0
+
+Added **Bastion Gilded**, a fourth variant with a different identity from the
+other three: black, bone and gold, with violet confined to the chrome.
+
+Its colours were sampled from the desktop it was designed against — gold from
+the character's eyes, bone from her skin, steel from her armour, violet from the
+mist behind her. The code area never uses violet; it appears only on the cursor,
+active tab border, badges, buttons and the active line number.
+
+Gold and bone sit about 40 degrees apart in hue, so hue alone cannot separate
+seven token roles. Gilded carries the difference on two other preattentive
+channels instead: a wide lightness spread, and font style — functions are bold,
+types and classes italic. Worst-case semantic pair is CIEDE2000 8.0, matching
+Clear, with mean chroma 0.065.
+
+- `tools/gilded.py` generates the theme from the base palette.
+- `terminal/bastion-gilded.conf` is the matching kitty palette.
+
 ## 1.4.0
 
 - Added `terminal/` — the Clear palette as a 16-colour ANSI scheme, with configs
