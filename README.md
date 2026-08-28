@@ -142,6 +142,12 @@ Override anything from your own `settings.json`:
 
 Comments are italic by default — the snippet above turns that off.
 
+## Terminal
+
+`terminal/` carries the same palette as a 16-colour ANSI scheme, with ready
+configs for kitty, foot, alacritty, ghostty, wezterm and Xresources. See
+`terminal/README.md`.
+
 ## License
 
 MIT

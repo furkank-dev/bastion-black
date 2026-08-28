@@ -1,0 +1,34 @@
+# Bastion Black Clear — alacritty
+# in alacritty.toml:  [general] import = ["~/.config/alacritty/bastion-black.toml"]
+
+[colors.primary]
+foreground = "#C2BDCB"
+background = "#000000"
+
+[colors.cursor]
+cursor = "#D497E0"
+text   = "#000000"
+
+[colors.selection]
+background = "#3A2C40"
+text       = "#E6E2EC"
+
+[colors.normal]
+black   = "#1A1A21"
+red     = "#CE8483"
+green   = "#91B79A"
+yellow  = "#DEC47F"
+blue    = "#89A4C5"
+magenta = "#C796D8"
+cyan    = "#85B7BD"
+white   = "#C2BDCB"
+
+[colors.bright]
+black   = "#807D88"
+red     = "#E8A1A0"
+green   = "#B0D3B8"
+yellow  = "#FFE281"
+blue    = "#A4BEDF"
+magenta = "#D497E0"
+cyan    = "#A0D3D9"
+white   = "#E6E2EC"

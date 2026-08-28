@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.4.0
+
+- Added `terminal/` — the Clear palette as a 16-colour ANSI scheme, with configs
+  for kitty, foot, alacritty, ghostty, wezterm and Xresources.
+- Fixed a collision that only mattered outside the editor: `terminal.ansiGreen`
+  and `terminal.ansiCyan` sat 6.6° apart in hue (CIEDE2000 2.2), and the bright
+  variants were the same hex. Harmless for syntax, since the syntax palette has
+  no green — but it would have made `ls`, `git diff` and `grep` output
+  unreadable. Green moved to hue 152°, cyan to 205°, now 14.2 apart.
+
 ## 1.3.1
 
 Documentation only — no colour changes, no need to reinstall if you already
