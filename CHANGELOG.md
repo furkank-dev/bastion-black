@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.7.0
+
+Reverts the cool family to the steel hue used up to 1.5.3.
+
+1.6.0 moved types, properties and parameters onto the armour's neutral grey to
+remove the blue tint, and 1.6.1 gave object keys the horn's bone white to
+recover the separation that move cost. Both are undone here: the steel tint is
+back, and with it the identical worst-case separation (CIEDE2000 10.7) that the
+bone-white detour had been built to restore. The tint turns out to be doing real
+work — it is the only channel distinguishing three grey roles from each other in
+a palette where everything else is gold.
+
+Everything since 1.5.3 that was not part of that experiment stays: violet search
+highlight, warm indent guides, warm whitespace and tree guides.
+
+## 1.6.1
+
+- Gilded: object keys and properties now use the bone white measured off the
+  character's horn (`#D8D6D3`, APCA Lc 82) — the brightest value in the palette.
+  In a YAML manifest or a JSON config the keys become the skeleton of the file,
+  readable at a glance, while values stay gold.
+- The rest of the grey family was respread across a wider lightness range to
+  make room: types at Lc 66, parameters at 53, unresolved names at 40. Worst
+  semantic pair improves from CIEDE2000 8.1 to 10.7, and the bottleneck moves
+  out of the greys and back into the gold family, where it is inherent to the
+  identity.
+
 ## 1.6.0
 
 - Gilded: the cool roles no longer read as blue. Types, classes, properties,
