@@ -111,6 +111,21 @@ c["editorBracketMatch.background"] = MAP["#C9A94E"] + "26"
 c["editorBracketMatch.border"]     = MAP["#C9A94E"] + "4D"
 c["editorOverviewRuler.bracketMatchForeground"] = MAP["#3E3947"]
 
+# ---------- search must pop against a gold-dominant palette ----------------
+# The inherited amber highlight sat at CIEDE2000 22 from the code around it —
+# effectively invisible when every other token is also gold. Violet is 79 away
+# and is already this variant's chrome colour, so search reads instantly.
+VIOLET = "#C57AD4"
+c["editor.findMatchBackground"]          = VIOLET + "59"
+c["editor.findMatchHighlightBackground"] = VIOLET + "33"
+c["editor.findMatchBorder"]              = VIOLET + "99"
+c["editor.findRangeHighlightBackground"] = VIOLET + "14"
+c["minimap.findMatchHighlight"]          = VIOLET + "AA"
+c["editorOverviewRuler.findMatchForeground"] = VIOLET + "AA"
+c["searchEditor.findMatchBackground"]    = VIOLET + "33"
+c["peekViewEditor.matchHighlightBackground"] = VIOLET + "44"
+c["peekViewResult.matchHighlightBackground"] = VIOLET + "44"
+
 # ---------- no bold, no italic beyond the base theme's own use -------------
 for rule in t["tokenColors"]:
     if rule.get("name") in ("Function and method names", "Types, classes, interfaces"):

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.2
+
+- Gilded: search highlight moved to violet. The inherited amber highlight sat at
+  CIEDE2000 22 from the surrounding code, which is nothing when every token in
+  the file is already gold — Ctrl+F results did not stand out. Violet is 79 away
+  from the palette's average and is already the variant's chrome colour.
+  Applies to find matches, the minimap, the overview ruler and peek views.
+
 ## 1.5.1
 
 Gilded rebuilt. The 1.5.0 release did not match what it was designed to be.
