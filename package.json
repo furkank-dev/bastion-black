@@ -1,0 +1,59 @@
+{
+  "name": "bastion-black",
+  "displayName": "Bastion Black",
+  "description": "A pitch-black, low-glare dark theme with muted violet and amber accents. Ships in two chroma levels for long sessions on OLED and high-contrast panels.",
+  "version": "1.5.1",
+  "publisher": "psik0t",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "dark",
+    "black",
+    "oled",
+    "purple",
+    "minimal",
+    "low contrast"
+  ],
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#000000",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/psik0t/bastion-black.git"
+  },
+  "bugs": {
+    "url": "https://github.com/psik0t/bastion-black/issues"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Bastion Black",
+        "uiTheme": "vs-dark",
+        "path": "./themes/bastion-black-color-theme.json"
+      },
+      {
+        "label": "Bastion Black Muted",
+        "uiTheme": "vs-dark",
+        "path": "./themes/bastion-black-muted-color-theme.json"
+      },
+      {
+        "label": "Bastion Black Clear",
+        "uiTheme": "vs-dark",
+        "path": "./themes/bastion-black-clear-color-theme.json"
+      },
+      {
+        "label": "Bastion Gilded",
+        "uiTheme": "vs-dark",
+        "path": "./themes/bastion-gilded-color-theme.json"
+      }
+    ]
+  }
+}

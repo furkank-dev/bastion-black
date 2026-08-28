@@ -1,0 +1,26 @@
+# Bastion Black Clear — ghostty
+# in ~/.config/ghostty/config:  config-file = bastion-black
+
+background = 000000
+foreground = c2bdcb
+cursor-color = d497e0
+cursor-text = 000000
+selection-background = 3a2c40
+selection-foreground = e6e2ec
+
+palette = 0=#1A1A21
+palette = 1=#CE8483
+palette = 2=#91B79A
+palette = 3=#DEC47F
+palette = 4=#89A4C5
+palette = 5=#C796D8
+palette = 6=#85B7BD
+palette = 7=#C2BDCB
+palette = 8=#807D88
+palette = 9=#E8A1A0
+palette = 10=#B0D3B8
+palette = 11=#FFE281
+palette = 12=#A4BEDF
+palette = 13=#D497E0
+palette = 14=#A0D3D9
+palette = 15=#E6E2EC
