@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.6.0
+
+- Gilded: the cool roles no longer read as blue. Types, classes, properties,
+  parameters and unresolved names all moved onto the armour's measured hue
+  (298.7 degrees) at chroma 0.012–0.030, which renders as a neutral grey rather
+  than the blue-violet the old 255-degree steel produced. Separation inside that
+  family now comes from lightness, so the worst semantic pair is CIEDE2000 8.1,
+  effectively unchanged from the blue version's 10.7 once the whole palette is
+  taken into account, and still above Clear's 8.0.
+- Bracket pairs and the git/info colour followed the same move.
+- Indent guides, whitespace marks, rulers and tree guides are in the warm family
+  (carried over from 1.5.3).
+
+## 1.5.3
+
+- Gilded: indent guides, whitespace marks, rulers and tree guides moved into the
+  warm family. They were inherited blue-grey from the base palette, which read as
+  a foreign colour against gold. Idle guides sit at 1.28:1 and the active block at
+  2.13:1 — visible where indentation carries meaning, quiet everywhere else.
+
 ## 1.5.2
 
 - Gilded: search highlight moved to violet. The inherited amber highlight sat at

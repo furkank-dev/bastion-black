@@ -70,11 +70,11 @@ SPEC = {
   "#C9A94E": (78.0,   0.080, 72.3),   # function
   "#C4899B": (78.0,   0.100, 59.6),   # string
   "#93A8D9": (GOLD,   0.050, 69.7),   # number / constant
-  "#63A39B": (STEEL,  0.055, 58.7),   # type / class
-  "#A897C4": (STEEL,  0.020, 63.3),   # property
-  "#8699A2": (ARMOUR, 0.022, 57.6),   # parameter
+  "#63A39B": (ARMOUR, 0.030, 58.7),   # type / class
+  "#A897C4": (ARMOUR, 0.012, 65.5),   # property
+  "#8699A2": (ARMOUR, 0.012, 53.0),   # parameter
   "#9E7FA8": (BONE,   0.014, 50.0),   # operator
-  "#8F8296": (ARMOUR, 0.022, 47.6),   # unresolved name
+  "#8F8296": (ARMOUR, 0.024, 44.0),   # unresolved name
   "#C46A6A": (CLAY,   0.080, 46.7),   # error
   "#7B7489": (BONE,   0.020, 48.0),   # comment
   "#4A4552": (BONE,   0.012, 24.2),   # punctuation
@@ -86,7 +86,7 @@ SPEC = {
   "#7C7689": (BONE,   0.018, 48.0),   # status bar / muted
   "#5FA396": (135.0,  0.045, 58.0),   # added / passing
   "#7CBAB2": (135.0,  0.045, 68.0),   # untracked
-  "#6E8FB8": (STEEL,  0.045, 58.0),   # info / modified
+  "#6E8FB8": (ARMOUR, 0.030, 58.0),   # info / modified
   "#F5C842": (GOLD,   0.110, 80.0),   # find match, lightbulb
   "#3E3947": (BONE,   0.010, 20.0),   # separators, ignored
   "#2A2630": (BONE,   0.008, 12.0),   # dimmed line numbers
@@ -102,14 +102,28 @@ t["name"] = "Bastion Gilded"
 c = t["colors"]
 
 # ---------- brackets: gold / bone / steel, never violet --------------------
-BRACKETS = [at_lc(78.0,  0.080, 64), at_lc(BONE,  0.018, 70), at_lc(STEEL, 0.050, 58),
-            at_lc(GOLD,  0.045, 74), at_lc(STEEL, 0.020, 52), at_lc(70.0,  0.070, 60)]
+BRACKETS = [at_lc(78.0,  0.080, 64), at_lc(BONE,  0.018, 70), at_lc(ARMOUR,0.030, 58),
+            at_lc(GOLD,  0.045, 74), at_lc(ARMOUR,0.014, 52), at_lc(70.0,  0.070, 60)]
 for i, col in enumerate(BRACKETS, 1):
     c[f"editorBracketHighlight.foreground{i}"] = col
 c["editorBracketHighlight.unexpectedBracket.foreground"] = MAP["#C46A6A"]
 c["editorBracketMatch.background"] = MAP["#C9A94E"] + "26"
 c["editorBracketMatch.border"]     = MAP["#C9A94E"] + "4D"
 c["editorOverviewRuler.bracketMatchForeground"] = MAP["#3E3947"]
+
+# ---------- indent guides in the warm family -------------------------------
+# Inherited from the base palette these were blue-grey, which read as a
+# foreign colour in a gold theme. Python and YAML need them, so they stay
+# visible but quiet: 1.28:1 idle, 2.13:1 for the active block.
+for k, v in (("editorIndentGuide.background",   "#241F17"),
+             ("editorIndentGuide.background1",  "#241F17"),
+             ("editorIndentGuide.activeBackground",  "#4A4238"),
+             ("editorIndentGuide.activeBackground1", "#4A4238"),
+             ("editorWhitespace.foreground",    "#221D15"),
+             ("editorRuler.foreground",         "#1C1811"),
+             ("tree.indentGuidesStroke",        "#332C22"),
+             ("tree.inactiveIndentGuidesStroke","#241F17")):
+    c[k] = v
 
 # ---------- search must pop against a gold-dominant palette ----------------
 # The inherited amber highlight sat at CIEDE2000 22 from the code around it —
