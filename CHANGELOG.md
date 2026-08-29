@@ -1,5 +1,56 @@
 # Changelog
 
+## 2.0.0
+
+Added **Signalman**, built to four stated priorities in order.
+
+1. Nothing that costs a security engineer. Terminal ANSI is left honest — green
+   reads as green, red as red — because `git diff`, `pytest`, `trivy` and
+   `semgrep` all lean on that distinction, and a learned mustard/rust reflex is a
+   worse trade than a slightly less pure palette. Comments sit at 5.15:1, above
+   the readability floor. Worst semantic pair is CIEDE2000 18.5, the highest in
+   this extension.
+2. Fits the desktop. Violet `#C57AD4` — the wallpaper, waybar and rofi colour —
+   carries cursor, selection, active line number, search and chrome. It never
+   enters the code.
+3. Reads as a terminal. Black background, amber-dominant code, no white.
+4. Monochrome as far as the above allow. The code axis spans only hue 80–92;
+   separation comes from a lightness ladder running Lc 19 to 88. Plain text is
+   held at chroma 0.030 because the most frequent token should be the calmest.
+
+## 1.9.0
+
+Added **Bastion Amber**, a P3 phosphor terminal: one hue, black background,
+nothing else.
+
+Every role sits on the same amber and is separated only by lightness, from Lc 21
+at the punctuation to Lc 86 at the type names. Chroma is assigned by how often a
+token appears — plain text is the calmest thing on screen at 0.014, keywords the
+loudest at 0.120 — because the most frequent token should never be the most
+saturated one. A first pass that optimised separation alone put plain text at
+0.140 and had to be thrown out.
+
+Monochrome is usually assumed to be unreadable. Measured, this palette reaches
+CIEDE2000 13.3 at its worst pair, above every other variant here including the
+ones with seven hues. Earlier monochrome attempts scored 4 because the roles were
+packed into a narrow lightness band, not because the hue count was the problem.
+
+## 1.8.0
+
+Added **Bastion Cipher**, an amber terminal variant: black, yellow and white,
+with a single clay red kept for errors.
+
+Hue does almost no work in this palette — amber and warm white sit a few degrees
+apart — so separation is carried by lightness across a wide span, from Lc 24 at
+the punctuation up to Lc 84 at the type names. Constrained to that family the
+worst semantic pair still lands at CIEDE2000 9.8, above Clear's 8.0, so the look
+costs nothing in legibility. Chrome, cursor and search highlight are amber rather
+than violet. Terminal ANSI colours stay functionally distinct because `ls`,
+`git diff` and `grep` depend on them.
+
+- `tools/cipher.py` generates the theme.
+- `nvim/bastion-cipher.lua` and `terminal/bastion-cipher.conf` ship alongside.
+
 ## 1.7.0
 
 Reverts the cool family to the steel hue used up to 1.5.3.
