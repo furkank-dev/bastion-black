@@ -6,8 +6,9 @@
 -- Terminal ANSI durust birakildi: yesil yesil, kirmizi kirmizi. git diff,
 -- pytest, trivy ve semgrep bu ayrima bagli, palet saflığından once gelir.
 -- Kurulum:
---   colors/signalman.lua
---   lua/lualine/themes/signalman.lua
+--   lua/signalman.lua                  (modul)
+--   colors/signalman.lua               (tek satir: require('signalman').load())
+--   lua/lualine/themes/signalman.lua   (lualine)
 
 local M = {}
 
@@ -37,8 +38,8 @@ local c = {
   unknown   = '#847552', -- names the LSP cannot resolve
   comment   = '#8C7C5B',
   operator  = '#8B7A56',
-  punct     = '#675B3F',
-  linenr    = '#7A6B4B',
+  punct     = '#817558',
+  linenr    = '#8B7C5B',
 
   violet    = '#C57AD4', -- cursor, active line number, search
   clay      = '#F0887B', -- errors
@@ -63,7 +64,7 @@ function M.load()
   local function bg(colour) return t and NONE or colour end
 
   vim.cmd 'highlight clear'
-  if vim.fn.exists 'syntax_on' then vim.cmd 'syntax reset' end
+  if vim.fn.exists('syntax_on') == 1 then vim.cmd 'syntax reset' end
   vim.o.background = 'dark'
   vim.o.termguicolors = true
   vim.g.colors_name = 'signalman'
@@ -114,7 +115,7 @@ function M.load()
   hl('ModeMsg',       { fg = c.fg })
 
   -- ── classic syntax groups ───────────────────────────────────────────
-  hl('Comment',       { fg = c.comment, italic = true })
+  hl('Comment',       { fg = c.comment })
   hl('Keyword',       { fg = c.gold })
   hl('Statement',     { fg = c.gold })
   hl('Conditional',   { fg = c.gold })
@@ -289,6 +290,85 @@ function M.load()
   hl('IblScope',           { fg = '#6B5A2E' })
   hl('IndentBlanklineChar',      { fg = '#3A342A' })
   hl('IndentBlanklineContextChar', { fg = '#6A6052' })
+
+
+  -- ── diagnostic virtual lines ────────────────────────────────────────
+  -- options.lua'da virtual_lines aciktir, bu gruplara gun boyu bakilir
+  hl('DiagnosticVirtualLinesError', { fg = c.clay,      bg = '#170A08' })
+  hl('DiagnosticVirtualLinesWarn',  { fg = c.gold_pale, bg = '#161006' })
+  hl('DiagnosticVirtualLinesInfo',  { fg = c.info,      bg = '#0A0D13' })
+  hl('DiagnosticVirtualLinesHint',  { fg = c.steel_dim, bg = c.bg_elev })
+  hl('DiagnosticVirtualTextError',  { fg = c.clay })
+  hl('DiagnosticVirtualTextWarn',   { fg = c.gold_pale })
+  hl('DiagnosticVirtualTextInfo',   { fg = c.info })
+  hl('DiagnosticVirtualTextHint',   { fg = c.steel_dim })
+  hl('DiagnosticDeprecated',        { fg = c.unknown, strikethrough = true })
+
+  -- ── snacks.picker (LazyVim artik Telescope yerine bunu kullaniyor) ──
+  hl('SnacksPickerBorder',    { fg = c.border,    bg = c.bg_elev })
+  hl('SnacksPickerTitle',     { fg = c.violet })
+  hl('SnacksPickerInput',     { fg = c.fg,        bg = c.bg_sel })
+  hl('SnacksPickerInputTitle',{ fg = c.bg,        bg = c.violet })
+  hl('SnacksPickerList',      { fg = c.fg,        bg = c.bg_elev })
+  hl('SnacksPickerListTitle', { fg = c.violet })
+  hl('SnacksPickerMatch',     { fg = c.violet,    bold = true })
+  hl('SnacksPickerSelected',  { fg = c.fg_bright, bg = c.bg_sel })
+  hl('SnacksPickerDir',       { fg = c.operator })
+  hl('SnacksPickerFile',      { fg = c.fg })
+  hl('SnacksPickerPreview',   { bg = c.bg })
+
+  -- ── blink.cmp ──────────────────────────────────────────────────────
+  hl('BlinkCmpMenu',            { fg = c.fg,        bg = c.bg_elev })
+  hl('BlinkCmpMenuBorder',      { fg = c.border,    bg = c.bg_elev })
+  hl('BlinkCmpMenuSelection',   { fg = c.fg_bright, bg = c.bg_sel })
+  hl('BlinkCmpLabel',           { fg = c.fg })
+  hl('BlinkCmpLabelMatch',      { fg = c.violet,    bold = true })
+  hl('BlinkCmpLabelDeprecated', { fg = c.unknown,   strikethrough = true })
+  hl('BlinkCmpKind',            { fg = c.gold })
+  hl('BlinkCmpKindFunction',    { fg = c.gold_pale })
+  hl('BlinkCmpKindMethod',      { fg = c.gold_pale })
+  hl('BlinkCmpKindVariable',    { fg = c.fg })
+  hl('BlinkCmpKindClass',       { fg = c.steel })
+  hl('BlinkCmpKindKeyword',     { fg = c.gold })
+  hl('BlinkCmpKindText',        { fg = c.fg })
+  hl('BlinkCmpKindSnippet',     { fg = c.violet })
+  hl('BlinkCmpDoc',             { fg = c.fg,     bg = c.bg_elev })
+  hl('BlinkCmpDocBorder',       { fg = c.border, bg = c.bg_elev })
+  hl('BlinkCmpSignatureHelp',   { fg = c.fg,     bg = c.bg_elev })
+  hl('BlinkCmpSignatureHelpActiveParameter', { fg = c.violet, bold = true })
+
+  -- ── temel eksikler ──────────────────────────────────────────────────
+  hl('NormalNC',      { fg = c.fg, bg = c.bg })
+  hl('CursorColumn',  { bg = c.bg_line })
+  hl('Substitute',    { fg = c.bg, bg = c.gold_pale })
+  hl('QuickFixLine',  { fg = c.fg_bright, bg = c.bg_sel })
+  hl('Conceal',       { fg = c.punct })
+  hl('MsgArea',       { fg = c.fg })
+  hl('MsgSeparator',  { fg = c.border })
+  hl('LspCodeLens',   { fg = c.operator })
+  hl('LspSignatureActiveParameter', { fg = c.violet, bold = true })
+
+  hl('SpellBad',   { sp = c.clay,      undercurl = true })
+  hl('SpellCap',   { sp = c.gold_pale, undercurl = true })
+  hl('SpellLocal', { sp = c.info,      undercurl = true })
+  hl('SpellRare',  { sp = c.steel_dim, undercurl = true })
+
+  -- ── treesitter tamamlayicilar ───────────────────────────────────────
+  hl('@comment.todo',    { fg = c.bg, bg = c.gold_pale, bold = true })
+  hl('@comment.note',    { fg = c.bg, bg = c.info,      bold = true })
+  hl('@comment.warning', { fg = c.bg, bg = c.gold,      bold = true })
+  hl('@comment.error',   { fg = c.bg, bg = c.clay,      bold = true })
+  hl('@diff.plus',       { fg = c.sage })
+  hl('@diff.minus',      { fg = c.clay })
+  hl('@diff.delta',      { fg = c.gold_pale })
+  hl('@string.documentation',    { fg = c.gold_mid })
+  hl('@variable.parameter.builtin', { fg = c.cream })
+  hl('@markup.heading.1', { fg = c.violet,    bold = true })
+  hl('@markup.heading.2', { fg = c.steel,     bold = true })
+  hl('@markup.heading.3', { fg = c.gold_pale, bold = true })
+  hl('@markup.heading.4', { fg = c.gold })
+  hl('@markup.heading.5', { fg = c.steel_dim })
+  hl('@markup.heading.6', { fg = c.operator })
 
   -- ── terminal palette, matching the kitty config ─────────────────────
   vim.g.terminal_color_0  = '#524938'
