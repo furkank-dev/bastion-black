@@ -13,7 +13,7 @@ local c = {
   amber   = '#A7B2BD',
   gold    = '#B4BDC4',
   bright  = '#F7C371',
-  err     = '#F0887B',
+  err     = '#FF7061',
 }
 
 return {

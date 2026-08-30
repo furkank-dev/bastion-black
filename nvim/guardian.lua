@@ -57,7 +57,8 @@ local c = {
   regex_meta = '#DCC58C', -- quantifier, anchor, karakter sinifi, kacis
 
   violet    = '#C57AD4', -- cursor, active line number, search
-  clay      = '#F0887B', -- errors
+  warn      = '#F7BD00', -- uyari: aksandan ayri semantik sari
+  clay      = '#FF7061', -- errors
   sage      = '#58BE6C', -- git added
   info      = '#78A1D5',
 }
@@ -271,7 +272,7 @@ function M.load()
   --   hata vs fonksiyon 39.5 | hata vs sayi 23.9 | bilgi vs kod ekseni > 40
   -- Uyari kasten kehribar ailesinden: uyari kod degil, kodun bir hali.
   hl('DiagnosticError',         { fg = c.clay })
-  hl('DiagnosticWarn',          { fg = c.gold_pale })
+  hl('DiagnosticWarn',          { fg = c.warn })
   hl('DiagnosticInfo',          { fg = c.info })
   hl('DiagnosticHint',          { fg = c.steel })
   hl('DiagnosticOk',            { fg = c.sage })
@@ -292,11 +293,11 @@ function M.load()
   hl('DiffDelete',    { fg = c.clay, bg = '#1A0F0C' })
   hl('DiffText',      { bg = '#2A2318' })
   hl('Added',         { fg = c.sage })
-  hl('Changed',       { fg = c.gold_pale })
+  hl('Changed',       { fg = c.warn })
   hl('Removed',       { fg = c.clay })
 
   hl('GitSignsAdd',    { fg = c.sage })
-  hl('GitSignsChange', { fg = c.gold_pale })
+  hl('GitSignsChange', { fg = c.warn })
   hl('GitSignsDelete', { fg = c.clay })
 
   -- ── telescope ───────────────────────────────────────────────────────
@@ -422,6 +423,7 @@ function M.load()
   hl('FlashPrompt',     { fg = c.fg, bg = c.bg_elev })
   hl('FlashPromptIcon', { fg = c.violet })
   hl('FlashCursor',     { fg = c.bg, bg = c.violet })
+
 
   -- ── terminal palette, matching the kitty config ─────────────────────
   vim.g.terminal_color_0  = '#3E4348'

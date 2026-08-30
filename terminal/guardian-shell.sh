@@ -25,7 +25,7 @@ __gd_steel_dim='142;157;170' # #ADA261  property
 __gd_fg='198;202;205'       # #C4B9A7  text
 __gd_punct='117;125;132'    # #877E68  punctuation
 __gd_dim='111;114;117'      # #737068  gutter
-__gd_clay='240;136;123'     # #F0887B  error
+__gd_clay='255;112;97'     # #F0887B  error
 __gd_sage='88;190;108'      # #58BE6C  ok
 
 # ── git durumu (kabuktan bagimsiz) ─────────────────────────────────
