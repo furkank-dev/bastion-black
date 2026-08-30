@@ -71,10 +71,10 @@ if [ -n "${ZSH_VERSION:-}" ]; then
 
     local tail_part code_part
     if [ "$code" -ne 0 ]; then
-      tail_part="$(__sm_zc "$__sm_clay")%#${R} "
+      tail_part="$(__sm_zc "$__sm_clay")%(!.#.$)${R} "
       code_part=" $(__sm_zc "$__sm_clay")${code}${R}"
     else
-      tail_part="$(__sm_zc "$__sm_gold_pale")%#${R} "
+      tail_part="$(__sm_zc "$__sm_gold_pale")%(!.#.$)${R} "
       code_part=""
     fi
 

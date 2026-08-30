@@ -412,6 +412,17 @@ function M.load()
   hl('@markup.heading.5', { fg = c.steel_dim })
   hl('@markup.heading.6', { fg = c.operator })
 
+  -- ── flash.nvim ──────────────────────────────────────────────────────
+  -- Atlama etiketleri chrome ailesinden: navigasyon arayuzdur, kod degil.
+  -- Etiket en belirgin olan; eslesme bir ton geride, arka plan sonuk.
+  hl('FlashBackdrop',   { fg = c.linenr })
+  hl('FlashMatch',      { fg = c.bg, bg = c.steel_dim })
+  hl('FlashCurrent',    { fg = c.bg, bg = c.gold_pale })
+  hl('FlashLabel',      { fg = c.bg, bg = c.violet, bold = true })
+  hl('FlashPrompt',     { fg = c.fg, bg = c.bg_elev })
+  hl('FlashPromptIcon', { fg = c.violet })
+  hl('FlashCursor',     { fg = c.bg, bg = c.violet })
+
   -- ── terminal palette, matching the kitty config ─────────────────────
   vim.g.terminal_color_0  = '#524938'
   vim.g.terminal_color_1  = '#FF7061'

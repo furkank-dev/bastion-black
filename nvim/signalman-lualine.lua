@@ -26,7 +26,7 @@ return {
   visual   = { a = { fg = c.bg, bg = c.gold,   gui = 'bold' } },
   replace  = { a = { fg = c.bg, bg = c.err,    gui = 'bold' } },
   command  = { a = { fg = c.bg, bg = c.amber,  gui = 'bold' } },
-  terminal = { a = { fg = c.bg, bg = c.accent, gui = 'bold' } },
+  terminal = { a = { fg = c.bg, bg = c.gold,   gui = 'bold' } },
   inactive = {
     a = { fg = c.dim, bg = 'NONE' },
     b = { fg = c.dim, bg = 'NONE' },
