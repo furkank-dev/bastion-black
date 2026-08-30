@@ -38,7 +38,7 @@ local c = {
 
   -- kod ekseni
   gold      = '#A7B2BD', -- keywords, the eye colour
-  gold_pale = '#F3D573', -- functions
+  gold_pale = '#F7C371', -- functions
   gold_mid  = '#B4BDC4', -- strings (soguk taraf, blok halinde okunur)
   cream     = '#C4A86D', -- numbers, constants (en sicak, en doygun)
   steel     = '#DFE6EC', -- types, classes
@@ -93,7 +93,7 @@ function M.load()
   hl('FloatTitle',    { fg = c.violet, bg = bg(c.bg_elev) })
   hl('Cursor',        { fg = c.bg, bg = c.gold_pale })
   hl('CursorLine',    { bg = line_bg })
-  hl('CursorLineNr',  { fg = c.violet, bold = true })
+  hl('CursorLineNr',  { fg = c.gold_pale, bold = true })
   hl('CursorLineSign',{ bg = line_bg })
   hl('CursorLineFold',{ bg = line_bg })
   hl('LineNr',        { fg = c.linenr })

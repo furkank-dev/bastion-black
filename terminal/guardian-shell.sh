@@ -17,7 +17,7 @@
 # nvim/signalman.lua ve terminal/signalman.conf ile ayni degerler.
 __gd_violet='197;122;212'   # #C57AD4  chrome
 __gd_gold='167;178;189'      # #CD8B18  keyword
-__gd_gold_pale='243;213;115' # #F7D856  function
+__gd_gold_pale='247;195;113' # #F7C371  function
 __gd_gold_mid='180;189;196' # #C7BE83  string
 __gd_cream='196;168;109'     # #FF9E2D  number
 __gd_steel='223;230;236'    # #F2E3C3  type
