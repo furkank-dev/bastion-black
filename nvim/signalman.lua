@@ -1,10 +1,17 @@
 -- signalman.lua — Neovim colourscheme
 --
--- Kod ekseni tek renk: kehribar, ton 80-92 arasi, ayrim parlaklikla.
--- Chrome mor (#C57AD4) — imlec, secim, aktif satir numarasi. Sistem
--- temasiyla koprü, koda hic girmez.
+-- Kod ekseni tek aile: kehribar. Ayrim artik sadece parlaklikla degil,
+-- parlaklik x doygunluk x dar bir ton araligiyla (OKLCh hue 46-118) yapiliyor.
+-- Chrome mor (#C57AD4) — imlec, secim, aktif satir numarasi. Koda hic girmez.
+-- Gutter notr gri: satir numarasi kod degil, arayuz.
 -- Terminal ANSI durust birakildi: yesil yesil, kirmizi kirmizi. git diff,
--- pytest, trivy ve semgrep bu ayrima bagli, palet saflığından once gelir.
+-- pytest, trivy ve semgrep bu ayrima bagli, palet safligindan once gelir.
+--
+-- 2.2.0 olcumleri (CIEDE2000 ayrim, APCA Lc kontrast, siyah zemin):
+--   yan yana gelen token ciftlerinde en dusuk ayrim   0.47 -> 8.28
+--   yorum kontrasti                                   Lc 33.7 -> 45.9
+--   operator kontrasti                                Lc 32.8 -> 52.6
+--
 -- Kurulum:
 --   lua/signalman.lua                  (modul)
 --   colors/signalman.lua               (tek satir: require('signalman').load())
@@ -15,31 +22,39 @@ local M = {}
 -- Varsayilanlar. init.lua'dan degistirmek icin:
 --   require('signalman').setup({ transparent = false })
 M.opts = {
-  transparent = false,   -- yuzen pencereler, durum cubugu ve zemin saydam kalir
-  cursorline  = false,  -- imlec satirinda dolgu yok, sadece satir numarasi vurgulanir
+  transparent = false,  -- yuzen pencereler, durum cubugu ve zemin saydam kalir
+  cursorline  = true,   -- imlec satirinda cok hafif dolgu (L* +5.6, dikkat dagitmaz)
 }
 
 local c = {
   bg        = '#000000',
   bg_elev   = '#0A0806',
-  bg_line   = '#0D0A07',
+  bg_line   = '#141110', -- imlec satiri: siyaha gore L* +5.6, gorunur ama sessiz
   bg_sel    = '#2A1F30',
   border    = '#241E14',
 
-  fg        = '#C2B6A3', -- plain text, bone
-  fg_bright = '#F1E5CD',
-  gold      = '#C3973E', -- keywords, the eye colour
-  gold_pale = '#F5CF57', -- functions
-  gold_mid  = '#DEC472', -- strings
-  cream     = '#DBA21A', -- numbers, constants
-  steel     = '#F6DDB3', -- types, classes
-  steel_dim = '#A38F52', -- properties, object keys
-  armour    = '#96855E', -- parameters
-  unknown   = '#847552', -- names the LSP cannot resolve
-  comment   = '#8C7C5B',
-  operator  = '#8B7A56',
-  punct     = '#817558',
-  linenr    = '#8B7C5B',
+  fg        = '#C4B9A7', -- plain text, bone
+  fg_bright = '#EFE5D0',
+
+  -- kod ekseni
+  gold      = '#CD8B18', -- keywords, the eye colour
+  gold_pale = '#F7D856', -- functions
+  gold_mid  = '#C7BE83', -- strings (soguk taraf, blok halinde okunur)
+  cream     = '#FF9E2D', -- numbers, constants (en sicak, en doygun)
+  steel     = '#F2E3C3', -- types, classes
+  steel_dim = '#ADA261', -- properties, object keys
+  armour    = '#A2886F', -- parameters
+  unknown   = '#88857F', -- LSP'nin cozemedigi isimler: doygunluk sifirlanir
+
+  -- yapisal eksen (eski surumde altisi da neredeyse ayni renkti, artik degil)
+  comment   = '#939A79', -- Lc 45.9 — geride ama gunduz de okunur
+  operator  = '#BF9E71', -- operator anlam tasir, noktalamadan parlak
+  punct     = '#877E68',
+  linenr    = '#737068', -- notr: gutter arayuzdur, kod degil
+
+  -- regex govdesi ayri ele alinir
+  regex      = '#D79C80', -- literal karakterler
+  regex_meta = '#FFC372', -- quantifier, anchor, karakter sinifi, kacis
 
   violet    = '#C57AD4', -- cursor, active line number, search
   clay      = '#F0887B', -- errors
@@ -62,6 +77,7 @@ function M.load()
   local t = M.opts.transparent
   local NONE = 'NONE'
   local function bg(colour) return t and NONE or colour end
+  local line_bg = M.opts.cursorline and not t and c.bg_line or NONE
 
   vim.cmd 'highlight clear'
   if vim.fn.exists('syntax_on') == 1 then vim.cmd 'syntax reset' end
@@ -71,13 +87,18 @@ function M.load()
 
   -- ── editor ──────────────────────────────────────────────────────────
   hl('Normal',        { fg = c.fg, bg = bg(c.bg) })
+  hl('NormalNC',      { fg = c.fg, bg = bg(c.bg) })
   hl('NormalFloat',   { fg = c.fg, bg = bg(c.bg_elev) })
   hl('FloatBorder',   { fg = t and '#4A4238' or c.border, bg = bg(c.bg_elev) })
   hl('FloatTitle',    { fg = c.violet, bg = bg(c.bg_elev) })
   hl('Cursor',        { fg = c.bg, bg = c.violet })
-  hl('CursorLine',    { bg = M.opts.cursorline and c.bg_line or NONE })
-  hl('CursorLineNr',  { fg = c.violet, bold = false })
+  hl('CursorLine',    { bg = line_bg })
+  hl('CursorLineNr',  { fg = c.violet, bold = true })
+  hl('CursorLineSign',{ bg = line_bg })
+  hl('CursorLineFold',{ bg = line_bg })
   hl('LineNr',        { fg = c.linenr })
+  hl('LineNrAbove',   { fg = c.linenr })
+  hl('LineNrBelow',   { fg = c.linenr })
   hl('SignColumn',    { bg = bg(c.bg) })
   hl('ColorColumn',   { bg = c.bg_elev })
   hl('Visual',        { bg = '#2E2716' })
@@ -139,7 +160,7 @@ function M.load()
   hl('Type',          { fg = c.steel })
   hl('Typedef',       { fg = c.steel })
   hl('Special',       { fg = c.gold_pale })
-  hl('SpecialChar',   { fg = '#F0D07C' })
+  hl('SpecialChar',   { fg = c.regex_meta })
   hl('Todo',          { fg = c.bg, bg = c.gold_pale, bold = true })
   hl('Error',         { fg = c.clay })
   hl('Underlined',    { fg = c.info, underline = true })
@@ -163,9 +184,8 @@ function M.load()
   hl('@constructor',          { fg = c.steel })
 
   hl('@string',               { fg = c.gold_mid })
-  hl('@string.escape',        { fg = '#F0D07C' })
-  hl('@string.special',       { fg = '#F0D07C' })
-  hl('@string.regexp',        { fg = '#C4A176' })
+  hl('@string.escape',        { fg = c.regex_meta })
+  hl('@string.special',       { fg = c.regex_meta })
   hl('@character',            { fg = c.gold_mid })
 
   hl('@number',               { fg = c.cream })
@@ -207,6 +227,26 @@ function M.load()
   hl('@markup.list',          { fg = c.gold_pale })
   hl('@markup.quote',         { fg = c.comment, italic = true })
 
+  -- ── regex ───────────────────────────────────────────────────────────
+  -- Neovim once `@capture.dil` adini dener; regex parser'i enjekte edildiginde
+  -- asagidaki gruplar sadece regex govdesinde gecerli olur. Literal karakterler
+  -- geri cekilir, metakarakterler one cikar — regex okurken goz quantifier ve
+  -- anchor arar, harfleri degil.
+  hl('@string.regexp',                   { fg = c.regex })
+  hl('@string.regex',                    { fg = c.regex })
+  hl('@character.regex',                 { fg = c.regex })
+  hl('@constant.regex',                  { fg = c.regex })
+  hl('@operator.regex',                  { fg = c.regex_meta })  -- * + ? | {n,m}
+  hl('@punctuation.bracket.regex',       { fg = c.gold_pale })   -- ( ) [ ]
+  hl('@punctuation.delimiter.regex',     { fg = c.gold_pale })
+  hl('@punctuation.special.regex',       { fg = c.regex_meta })  -- ^ $ .
+  hl('@character.special.regex',         { fg = c.regex_meta })
+  hl('@constant.character.escape',       { fg = c.regex_meta })  -- \b \d \w \s
+  hl('@constant.character.escape.regex', { fg = c.regex_meta })
+  hl('@keyword.regex',                   { fg = c.gold })
+  hl('@variable.regex',                  { fg = c.steel_dim })   -- adlandirilmis grup
+  hl('@property.regex',                  { fg = c.steel_dim })
+
   -- ── lsp semantic tokens ─────────────────────────────────────────────
   -- Anything the language server resolves gets a real colour here; anything
   -- it cannot resolve falls back to treesitter, which is why unresolved
@@ -223,19 +263,23 @@ function M.load()
   hl('@lsp.type.namespace',     { fg = c.steel_dim })
   hl('@lsp.type.decorator',     { fg = c.gold })
   hl('@lsp.type.selfKeyword',   { fg = c.cream })
+  hl('@lsp.type.regexp',        { fg = c.regex })
   hl('@lsp.mod.readonly',       { fg = c.cream })
 
   -- ── diagnostics ─────────────────────────────────────────────────────
-  hl('DiagnosticError',        { fg = c.clay })
-  hl('DiagnosticWarn',         { fg = c.gold_pale })
-  hl('DiagnosticInfo',         { fg = c.info })
-  hl('DiagnosticHint',         { fg = c.steel })
-  hl('DiagnosticOk',           { fg = c.sage })
+  -- Kehribar zeminde tehlike renkleri olculdu (CIEDE2000):
+  --   hata vs fonksiyon 39.5 | hata vs sayi 23.9 | bilgi vs kod ekseni > 40
+  -- Uyari kasten kehribar ailesinden: uyari kod degil, kodun bir hali.
+  hl('DiagnosticError',         { fg = c.clay })
+  hl('DiagnosticWarn',          { fg = c.gold_pale })
+  hl('DiagnosticInfo',          { fg = c.info })
+  hl('DiagnosticHint',          { fg = c.steel })
+  hl('DiagnosticOk',            { fg = c.sage })
   hl('DiagnosticUnderlineError',{ sp = c.clay,      undercurl = true })
   hl('DiagnosticUnderlineWarn', { sp = c.gold_pale, undercurl = true })
   hl('DiagnosticUnderlineInfo', { sp = c.info,      undercurl = true })
   hl('DiagnosticUnderlineHint', { sp = c.steel,     undercurl = true })
-  hl('DiagnosticUnnecessary',   { fg = c.punct })
+  hl('DiagnosticUnnecessary',   { fg = c.unknown })
 
   hl('LspReferenceText',  { bg = c.bg_sel })
   hl('LspReferenceRead',  { bg = c.bg_sel })
@@ -291,7 +335,6 @@ function M.load()
   hl('IndentBlanklineChar',      { fg = '#3A342A' })
   hl('IndentBlanklineContextChar', { fg = '#6A6052' })
 
-
   -- ── diagnostic virtual lines ────────────────────────────────────────
   -- options.lua'da virtual_lines aciktir, bu gruplara gun boyu bakilir
   hl('DiagnosticVirtualLinesError', { fg = c.clay,      bg = '#170A08' })
@@ -338,7 +381,6 @@ function M.load()
   hl('BlinkCmpSignatureHelpActiveParameter', { fg = c.violet, bold = true })
 
   -- ── temel eksikler ──────────────────────────────────────────────────
-  hl('NormalNC',      { fg = c.fg, bg = c.bg })
   hl('CursorColumn',  { bg = c.bg_line })
   hl('Substitute',    { fg = c.bg, bg = c.gold_pale })
   hl('QuickFixLine',  { fg = c.fg_bright, bg = c.bg_sel })
@@ -361,7 +403,7 @@ function M.load()
   hl('@diff.plus',       { fg = c.sage })
   hl('@diff.minus',      { fg = c.clay })
   hl('@diff.delta',      { fg = c.gold_pale })
-  hl('@string.documentation',    { fg = c.gold_mid })
+  hl('@string.documentation',       { fg = c.gold_mid })
   hl('@variable.parameter.builtin', { fg = c.cream })
   hl('@markup.heading.1', { fg = c.violet,    bold = true })
   hl('@markup.heading.2', { fg = c.steel,     bold = true })
@@ -379,7 +421,7 @@ function M.load()
   vim.g.terminal_color_5  = '#CF8FDD'
   vim.g.terminal_color_6  = '#70BCC5'
   vim.g.terminal_color_7  = '#CDC2A8'
-  vim.g.terminal_color_8  = '#85795E'
+  vim.g.terminal_color_8  = '#88857F'
   vim.g.terminal_color_9  = '#F6A397'
   vim.g.terminal_color_10 = '#6BD47F'
   vim.g.terminal_color_11 = '#FFD87A'
@@ -388,6 +430,43 @@ function M.load()
   vim.g.terminal_color_14 = '#85D2DB'
   vim.g.terminal_color_15 = '#E2DDD0'
 end
+
+-- :SignalmanCheck — token gruplarinin cozulmus renklerini ve siyah zemine gore
+-- APCA kontrastini yazar. Tema degistirdiginde "acaba tanimli mi" diye
+-- tahmin etmemek icin.
+vim.api.nvim_create_user_command('SignalmanCheck', function()
+  local groups = {
+    'Normal', 'Comment', 'Keyword', 'Function', 'String', 'Number', 'Type',
+    '@property', '@variable.parameter', '@operator', '@punctuation.bracket',
+    '@string.regexp', '@constant.character.escape', 'LineNr', 'CursorLineNr',
+    'DiagnosticError', 'DiagnosticWarn', 'DiagnosticInfo', 'DiagnosticHint',
+  }
+  local function lc(hex)
+    local r = tonumber(hex:sub(2, 3), 16) / 255
+    local g = tonumber(hex:sub(4, 5), 16) / 255
+    local b = tonumber(hex:sub(6, 7), 16) / 255
+    local y = 0.2126729 * r ^ 2.4 + 0.7151522 * g ^ 2.4 + 0.0721750 * b ^ 2.4
+    y = y > 0.022 and y or y + (0.022 - y) ^ 1.414
+    local s = (0.022 ^ 0.56 - y ^ 0.57) * 1.14
+    return math.abs(s < 0 and s + 0.027 or s - 0.027) * 100
+  end
+  local lines = { 'group                          renk       APCA Lc', '' }
+  for _, g in ipairs(groups) do
+    local h = vim.api.nvim_get_hl(0, { name = g, link = false })
+    if h and h.fg then
+      local hex = string.format('#%06X', h.fg)
+      lines[#lines + 1] = string.format('%-30s %-10s %5.1f', g, hex, lc(hex))
+    else
+      lines[#lines + 1] = string.format('%-30s %s', g, 'TANIMSIZ')
+    end
+  end
+  lines[#lines + 1] = ''
+  lines[#lines + 1] = 'Lc 45+ okunabilir, 60+ govde metni, 30 alti sadece dekor.'
+  vim.cmd 'new'
+  vim.bo.buftype = 'nofile'
+  vim.bo.bufhidden = 'wipe'
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end, { desc = 'Signalman: token renkleri ve kontrast raporu' })
 
 M.load()
 return M

@@ -1,8 +1,8 @@
 {
   "name": "signalman",
   "displayName": "Signalman",
-  "description": "A single-hue amber terminal theme on true black, with violet chrome and an honest ANSI palette. Built for people who read tool output all day.",
-  "version": "2.1.0",
+  "description": "A single-hue amber terminal theme on true black, with violet chrome and an honest ANSI palette. Token classes are separated by lightness x chroma, not lightness alone. Ships kitty, Neovim and shell palettes.",
+  "version": "2.2.0",
   "publisher": "psik0t",
   "license": "MIT",
   "engines": {

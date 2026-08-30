@@ -1,5 +1,51 @@
 # Changelog
 
+## 2.2.0
+
+Okunabilirlik revizyonu. Tema kimligi (siyah zemin, kehribar kod ekseni,
+mor chrome, durust ANSI) degismedi; ayrim ve kontrast olculup duzeltildi.
+
+### Token ayrimi
+Onceki surumde alti yapisal sinif — yorum, operator, noktalama, satir
+numarasi, parametre ve LSP'nin cozemedigi isimler — CIEDE2000 olcumunde
+0.47 ile 4.15 arasindaydi. 3'un altindaki fark ayirt edilemez sayilir;
+pratikte alti sinif tek renkti. Ayrim artik tek eksende (parlaklik) degil,
+parlaklik x doygunluk x dar bir ton araliginda (OKLCh hue 46-118) yapiliyor.
+
+    yan yana gelen token ciftlerinde en dusuk ayrim   0.47 -> 8.28
+
+### Kontrast (APCA Lc, siyah zemin)
+    yorum      33.7 -> 45.9    gunduz laptop ekraninda kayboluyordu
+    operator   32.8 -> 52.6    operator anlam tasir, dekor degil
+    ozellik    42.8 -> 51.4
+    satir no   33.6 -> 27.4    kasten dusuruldu: gutter arayuz, kod degil
+
+### Regex
+Regex govdesi tek blok kehribardi. Artik literal karakterler geri cekiliyor
+(#D79C80), metakarakterler one cikiyor (#FFC372): quantifier, anchor,
+karakter sinifi, kacis dizisi. Gruplar fonksiyon rengiyle. Neovim tarafinda
+`@capture.regex` dil-ozel yakalamalari, VSCodium tarafinda TextMate
+`*.regexp` kapsamlari kullaniliyor.
+
+### Imlec satiri
+`cursorline` varsayilan olarak acik. Dolgu #141110 — siyaha gore L* +5.6,
+gorunur ama dikkat dagitmaz. `CursorLineNr` kalin.
+
+### Kabuk
+Yeni: `terminal/signalman-shell.sh`. Prompt (git dali, calisma agaci durumu,
+sifir olmayan cikis kodu), LS_COLORS/EZA_COLORS, man sayfasi ve grep
+renkleri ayni paletten. Editor kehribar, terminal beyaz kaldigi surece tema
+yarim goruyordu.
+
+### Lualine
+Yeni: `nvim/signalman-lualine-sections.lua` (istege bagli). Satir:sutun
+gostergesi saatle karistirilamayacak sekilde yeniden yazildi
+(`ln 18/393 - 52`), ayrac yonleri tek yone cevrildi.
+
+### Arac
+`:SignalmanCheck` — token gruplarinin cozulmus renklerini ve APCA
+kontrastini listeler.
+
 ## 2.1.0
 
 The extension now ships one theme. Black, Muted, Clear, Gilded, Cipher and Amber

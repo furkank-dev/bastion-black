@@ -1,14 +1,18 @@
 -- lua/lualine/themes/signalman.lua
+--
+-- Mod rengi = chrome ailesi. Sag taraftaki bilgi bloklari kod ekseninden
+-- ayri tutulur: durum cubugu kod degil, arayuz. Bu yuzden b/c bolumleri
+-- notr, sadece a (mod) renkli.
 local c = {
   bg      = '#000000',
   panel   = '#0A0806',
-  fg      = '#C2B6A3',
-  muted   = '#8B7A56',
-  dim     = '#7A6B4B',
+  fg      = '#C4B9A7',
+  muted   = '#877E68',
+  dim     = '#737068',
   accent  = '#C57AD4',
-  amber   = '#C3973E',
-  gold    = '#DEC472',
-  bright  = '#F5CF57',
+  amber   = '#CD8B18',
+  gold    = '#C7BE83',
+  bright  = '#F7D856',
   err     = '#F0887B',
 }
 
