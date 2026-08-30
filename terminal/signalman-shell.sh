@@ -16,10 +16,10 @@
 # ── palet ──────────────────────────────────────────────────────────
 # nvim/signalman.lua ve terminal/signalman.conf ile ayni degerler.
 __sm_violet='197;122;212'   # #C57AD4  chrome
-__sm_gold='182;149;7'      # #B69507  keyword
+__sm_gold='205;139;24'      # #CD8B18  keyword
 __sm_gold_pale='247;216;86' # #F7D856  function
 __sm_gold_mid='199;190;131' # #C7BE83  string
-__sm_cream='230;171;23'     # #E6AB17  number
+__sm_cream='255;158;45'     # #FF9E2D  number
 __sm_steel='242;227;195'    # #F2E3C3  type
 __sm_steel_dim='173;162;97' # #ADA261  property
 __sm_fg='196;185;167'       # #C4B9A7  text

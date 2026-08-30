@@ -37,24 +37,24 @@ local c = {
   fg_bright = '#EFE5D0',
 
   -- kod ekseni
-  gold      = '#B69507', -- keywords, the eye colour
+  gold      = '#CD8B18', -- keywords, the eye colour
   gold_pale = '#F7D856', -- functions
   gold_mid  = '#C7BE83', -- strings (soguk taraf, blok halinde okunur)
-  cream     = '#E6AB17', -- numbers, constants (en sicak, en doygun)
+  cream     = '#FF9E2D', -- numbers, constants (en sicak, en doygun)
   steel     = '#F2E3C3', -- types, classes
   steel_dim = '#ADA261', -- properties, object keys
-  armour    = '#9B8A6D', -- parameters
+  armour    = '#A2886F', -- parameters
   unknown   = '#88857F', -- LSP'nin cozemedigi isimler: doygunluk sifirlanir
 
   -- yapisal eksen (eski surumde altisi da neredeyse ayni renkti, artik degil)
   comment   = '#939A79', -- Lc 45.9 — geride ama gunduz de okunur
-  operator  = '#B4A26F', -- operator anlam tasir, noktalamadan parlak
+  operator  = '#BF9E71', -- operator anlam tasir, noktalamadan parlak
   punct     = '#877E68',
   linenr    = '#737068', -- notr: gutter arayuzdur, kod degil
 
   -- regex govdesi ayri ele alinir
-  regex      = '#CFA079', -- literal karakterler
-  regex_meta = '#ECCB6E', -- quantifier, anchor, karakter sinifi, kacis
+  regex      = '#D79C80', -- literal karakterler
+  regex_meta = '#FFC372', -- quantifier, anchor, karakter sinifi, kacis
 
   violet    = '#C57AD4', -- cursor, active line number, search
   clay      = '#F0887B', -- errors
