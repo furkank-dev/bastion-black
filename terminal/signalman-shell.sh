@@ -201,3 +201,13 @@ export GREP_COLORS="mt=38;2;${__sm_violet};1:ln=38;2;${__sm_dim}:fn=38;2;${__sm_
 # ── bat / delta ────────────────────────────────────────────────────
 # bat'in kendi temasi yok; en yakini ANSI'ye saygi duyani.
 export BAT_THEME="ansi"
+
+# ── jq ─────────────────────────────────────────────────────────────
+# Alan sirasi: null:false:true:sayilar:stringler:diziler:nesneler:anahtarlar
+# Editordeki token siniflariyla ayni: sayi=cream, string=gold_mid,
+# yapisal parantezler=punct, anahtar=steel_dim (property rengi).
+export JQ_COLORS="0;38;2;${__sm_punct}:0;38;2;${__sm_cream}:0;38;2;${__sm_cream}:0;38;2;${__sm_cream}:0;38;2;${__sm_gold_mid}:0;38;2;${__sm_punct}:0;38;2;${__sm_punct}:0;38;2;${__sm_steel_dim}"
+
+# ── zsh-autosuggestions ────────────────────────────────────────────
+# Oneri metni gutter grisi: okunur ama yazdigin komutla karismaz.
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#737068"
