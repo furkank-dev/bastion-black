@@ -69,3 +69,21 @@ Added **Signalman**, built to four priorities in order.
 2. Fits the desktop: violet `#C57AD4` carries chrome and never enters the code.
 3. Reads as a terminal: black background, amber-dominant, no white.
 4. Monochrome as far as the above allow: code hue spans 80–92 only.
+## 3.0.0 — Guardian
+
+Signalman'in yaninda ikinci bir palet: **Guardian**. Eski tema silinmedi,
+ikisi de pakette duruyor, istedigin an gecis yapabilirsin.
+
+**Guardian nedir:** soguk celik gri kod ekseni, tek sari aksan (#F3D573).
+Kehribarin sicakligi yerine klinik bir ton. Mor sadece secim, arama ve
+url'de kaldi — kod alanina girmez ama sistem temasiyla bagi korur.
+
+- imlec ve aktif satir numarasi: sari (#F3D573)
+- secim, arama, url, kenarlik: mor (#C57AD4)
+- ANSI degismedi: kirmizi/yesil ayrimi ΔE 101, git diff ve trivy bozulmuyor
+- olcum: minΔE 4.30, minKontrast 4.34, 3'un altinda cift yok
+
+**Bilinen takas:** ayrim Signalman'in yarisi (8.45 -> 4.30). En yakin ciftler
+`armour/unknown` (4.30) ve `gold/gold_mid` yani keyword/string (4.68).
+Uzun kod inceleme oturumlarinda goz bir tik daha calisir. Karsiliginda
+ekran belirgin sekilde daha ciddi ve tek aksan odagi keskinlesir.
